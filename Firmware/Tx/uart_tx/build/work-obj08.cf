@@ -1,0 +1,10 @@
+v 4
+file "/home/boogersugar/Documents/dev/fpga/Project/Tx/uart_tx/" "tb/uart_tx_tb.vhd" "d264cba1515f5d68020ddc6ef9bccb821705d40a" "20251130161454.408":
+  entity uart_tx_tb at 1( 0) + 0 on 15;
+  architecture sim of uart_tx_tb at 8( 107) + 0 on 16;
+file "/home/boogersugar/Documents/dev/fpga/Project/Tx/uart_tx/" "src/baud_gen.vhd" "59b644282053225250fdf7162b90c49d44177030" "20251130161454.406":
+  entity baud_gen at 1( 0) + 0 on 13;
+  architecture rtl of baud_gen at 18( 320) + 0 on 14;
+file "/home/boogersugar/Documents/dev/fpga/Project/Tx/uart_tx/" "src/uart_tx.vhd" "461676e14e350cf7f577c1a7819f5cb4ad99043a" "20251130161454.405":
+  entity uart_tx at 1( 0) + 0 on 11;
+  architecture rtl of uart_tx at 34( 1114) + 0 on 12;
