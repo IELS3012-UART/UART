@@ -1,0 +1,63 @@
+#########################
+# Build Artifacts
+#########################
+
+# GHDL build directories
+build/
+*/build/
+**/build/
+
+# VCD waveform dumps
+*.vcd
+
+# GHDL work libraries
+*.cf
+work-obj*.cf
+
+#########################
+# Quartus Generated Files
+#########################
+
+db/
+incremental_db/
+output_files/
+
+# Quartus project metadata
+*.qws
+*.qsf
+*.qpf
+*.sopcinfo
+*.rpt
+*.summary
+
+#########################
+# Simulation Dumps
+#########################
+*.fst
+*.wlf
+
+#########################
+# Makefiles (optional)
+#########################
+Makefile
+*/Makefile
+**/Makefile
+
+#########################
+# Editor / OS junk
+#########################
+
+# VS Code
+.vscode/
+
+# Swap and temp
+*~
+*.tmp
+*.swp
+*.swo
+
+# macOS
+.DS_Store
+
+# Linux file explorer thumbnails
+*.directory
