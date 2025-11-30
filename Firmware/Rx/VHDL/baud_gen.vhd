@@ -5,12 +5,12 @@ use ieee.NUMERIC_STD.all;
 
 entity baud_gen is
     port (
-        clk     : in std_logic; 
-        rst_n   : in std_logic;  -- active low
-        dsvr    : in unsigned(15 downto 0); 
+        clk : in std_logic; 
+        rst_n : in std_logic;             -- aktiv high
+        dsvr : in unsigned(15 downto 0); 
 
         s_tick8x : out std_logic; 
-        s_tick   : out std_logic
+        s_tick : out std_logic
     );
 end entity; 
 
@@ -61,7 +61,7 @@ begin
                         s_tick_int <= '1'; 
                         
                     else 
-                        count2 <= count2 + '1'; 
+                        count2 <= count2 + 1;   -- <<< FIXED
                         s_tick_int <= '0'; 
                     end if; 
 
@@ -72,4 +72,3 @@ begin
             end if; 
     end process;  
 end architecture; 
-          
