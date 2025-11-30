@@ -5,7 +5,7 @@ use ieee.numeric_std.all;
 entity uartRX is
   port (
     clk         : in  std_logic;                    -- Systemklokke (50 MHz)
-    reset_n     : in  std_logic;                    -- Aktiv lav reset
+    reset       : in  std_logic;                    -- Aktiv hÃ¸y reset
     rx_i        : in  std_logic;                    -- Serielt RX-signal
     sample_tick : in  std_logic;                    -- Puls fra baudGen (8x baudrate)
     data_o      : out std_logic_vector(7 downto 0); -- Mottatt data
@@ -31,7 +31,7 @@ architecture rtl of uartRX is
   signal data_r     : std_logic_vector(7 downto 0) := (others => '0');
   signal ready_r    : std_logic := '0';
 
-  -- Synkroniser RX-inngangen for å unngå usikkerhet
+  -- Synkroniser RX-inngangen for ï¿½ unngï¿½ usikkerhet
   signal rx_q1, rx_q2 : std_logic := '1';
   signal rx_fall      : std_logic := '0'; -- Ett-klokkes puls ved fallende kant
   signal idle_guard   : integer range 0 to OVERSAMPLE*2 := 0;
@@ -66,9 +66,9 @@ begin
   ---------------------------------------------------------------------------
   -- Hoved prosess: FSM for mottak av serielle data
   ---------------------------------------------------------------------------
-  process(clk, reset_n)
+  process(clk, reset)
   begin
-    if reset_n = '0' then
+    if reset = '1' then
       -- Reset alt
       state      <= IDLE;
       s_count    <= 0;
@@ -80,7 +80,7 @@ begin
 
     elsif rising_edge(clk) then
 
-      -- Ventetid etter data_ack før ny mottak
+      -- Ventetid etter data_ack fï¿½r ny mottak
       if idle_guard > 0 then
         idle_guard <= idle_guard - 1;
       end if;
@@ -95,7 +95,7 @@ begin
       end if;
 
       -----------------------------------------------------------------------
-      -- FSM på sample_tick
+      -- FSM pÃ¥ sample_tick
       -----------------------------------------------------------------------
       if sample_tick = '1' then
         case state is
@@ -105,7 +105,7 @@ begin
             null;
 
           -- ---------------------------------------------------------------
-          -- START: teller 1 bitperiode, går så til DATA
+          -- START: teller 1 bitperiode, gÃ¥r sÃ¥ til DATA
           -- ---------------------------------------------------------------
           when START =>
             if s_count = OVERSAMPLE - 1 then
@@ -136,13 +136,13 @@ begin
             end if;
 
           -- ---------------------------------------------------------------
-          -- STOP: vent én bitperiode før data er ferdig
+          -- STOP: vent Ã©n bitperiode fÃ¸r data er ferdig
           -- ---------------------------------------------------------------
           when STOP =>
             if s_count = OVERSAMPLE - 1 then
               s_count <= 0;
               data_r  <= shift_reg;
-              ready_r <= '1';  -- <-- nå holdes denne høy til ACK
+              ready_r <= '1';  -- <-- nï¿½ holdes denne hï¿½y til ACK
               report "RX: mottatt byte = " &
                      integer'image(to_integer(unsigned(shift_reg)));
               state   <= DONE;
@@ -151,12 +151,12 @@ begin
             end if;
 
           -- ---------------------------------------------------------------
-          -- DONE: vent på ack fra systemet før reset og ny start
+          -- DONE: vent pÃ¥ ack fra systemet fÃ¸r reset og ny start
           -- ---------------------------------------------------------------
           when DONE =>
             if data_ack = '1' then
               ready_r    <= '0';
-              idle_guard <= OVERSAMPLE; -- kort pause før ny deteksjon
+              idle_guard <= OVERSAMPLE; -- kort pause fÃ¸r ny deteksjon
               state      <= IDLE;
             end if;
 
