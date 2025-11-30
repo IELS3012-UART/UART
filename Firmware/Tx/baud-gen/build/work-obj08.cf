@@ -1,0 +1,7 @@
+v 4
+file "/home/boogersugar/Documents/dev/fpga/Project/Tx/baud-gen/" "tb/baud_gen_tb.vhd" "44b4e976d68190fd217739a6db06f60a0e0937b2" "20251130140918.221":
+  entity baud_gen_tb at 1( 0) + 0 on 13;
+  architecture sim of baud_gen_tb at 8( 121) + 0 on 14;
+file "/home/boogersugar/Documents/dev/fpga/Project/Tx/baud-gen/" "src/baud_gen.vhd" "fa35babe3e3c0b64568b23195b9e732ff2f4a154" "20251130140918.220":
+  entity baud_gen at 1( 0) + 0 on 11;
+  architecture rtl of baud_gen at 18( 320) + 0 on 12;
