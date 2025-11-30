@@ -1,0 +1,7 @@
+v 4
+file "/home/boogersugar/Documents/dev/fpga/Project/Tx/fifo_tx/" "tb/fifo_tx_tb.vhd" "11f48ade2ea8b008f9215a91588d6643b176e322" "20251130141837.477":
+  entity fifo_tx_tb at 1( 0) + 0 on 13;
+  architecture sim of fifo_tx_tb at 8( 104) + 0 on 14;
+file "/home/boogersugar/Documents/dev/fpga/Project/Tx/fifo_tx/" "src/fifo_tx.vhd" "798d11a8fa0d1fbab66000b604437a09b844d129" "20251130141837.475":
+  entity fifo_tx at 1( 0) + 0 on 11;
+  architecture rtl of fifo_tx at 30( 665) + 0 on 12;
